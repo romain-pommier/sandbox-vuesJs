@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body >
+    <div id="app">
+        <p>Prenom: {{ prenom }} </p>
+        <p>Nom:  {{ nom }}</p>
+        <p >Date: {{ today }}</p>
+        <p>Nom complet: {{ nomComplet }}</p>
+        <p>Année: {{ birthday }}</p>
+        <p v-if="showStory == true" > {{ story }}</p>
+        <p v-else>{{ story | excerpt}}</p>
+        <button @click="showMore">Lire plus</button>
+        <ul>
+            <li v-for="voyage of voyages">{{voyage}} </li>
+        </ul>
+        <span v-bind:title="time" >Horloge: {{ time }}</span>
+        <div style="margin-top: 30px;" action="">
+
+            <div style="margin-bottom: 25px;">
+                <label for="prenom">Prenom:</label>
+                <input name="prenom"  type="text" v-model="prenom" />
+            </div>
+           
+            <div style="margin-bottom: 25px;">
+                <label for="nom">Nom:</label>
+                <input name="nom" type="text" v-model="nom" />
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+                <label for="birthday">Année de naissance:</label>
+                <input name="birthdayYear" type="number" v-model.number="birthdayYear" />
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <label style="display: block;" for="story">Histoire:</label>
+               <textarea name="story" id="" cols="30" rows="10" v-model="story"></textarea>
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+                <label for="showStory"> Voulez vous afficher l'histoire</label>
+                <input name="showStory" type="radio" v-model="showStory" v-bind:value="true" /> Oui
+                <input name="showStory" type="radio" v-model="showStory" v-bind:value="false" /> Non
+            </div>
+
+            <form  style="margin-bottom: 25px;">
+                <select v-on:change="addVoyage" v-model="newVoyage">
+                    <option disabled value="">Choisissez</option>
+                    <option >France</option>
+                    <option>Russie</option>
+                    <option>Espagne</option>
+                  </select>
+            </form>
+
+            <h1>Méthodes personnalisée</h1>
+            <div style="margin-bottom: 25px;">
+                <label style="display: block;" for="prix">Prix:</label>
+               <input type="number" name="prix" v-model="prix"></input>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <label style="display: block;" for="quantite">Quantité:</label>
+               <input type="number" name="quantite" id="" v-model="quantite"></input>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <label style="display: block;" for="quantite">Taux de TVA:</label>
+               <select name="quantite" id="" v-model="tauxTva">
+                    <option value="1">0%</option>
+                    <option value="1.05">5%</option>
+                    <option value="1.10">10%</option>
+                    <option value="1.15">15%</option>
+               </select>
+            </div>
+
+            <p>Montant sans TVA {{ prixSansTva }}</p>
+            <p>Montant avec TVA {{ prixAvecTva }}</p>
+            
+            <button type="submit">Envoyer</button>
+        </div>
+    </div>
+    
+    <script src="js/vue.js"></script>
+</body>
+
+</html>
