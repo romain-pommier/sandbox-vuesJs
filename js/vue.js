@@ -13,11 +13,11 @@ let vm = new Vue({
     time: '',
     userName: '',
     newVoyage:'',
-    prixSansTva,
-    prixAvecTva,
-    quantite,
-    prix,
-    tauxTva,
+    prixSansTva:0,
+    prixAvecTva:0,
+    quantite:0,
+    prix:0,
+    tauxTva:1,
   }, 
   created: function() { 
     const date =  new Date();
@@ -74,6 +74,12 @@ let vm = new Vue({
     },
     addVoyage: function(){
       this.voyages.push(this.newVoyage)
+    },
+    tvaPrice: function(){
+      this.prixAvecTva = this.prix*this.quantite*this.tauxTva
+    },
+    noTvaPrice: function(){
+      this.prixSansTva = this.prix*this.quantite
     }
     
   }
