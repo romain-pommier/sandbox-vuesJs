@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SandBox</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
 </head>
-<body >
+<body class="container mt-5 mb-5" >
     <div id="app">
-        <p>Prenom: {{ prenom }} </p>
-        <p>Nom:  {{ nom }}</p>
-        <p >Date: {{ today }}</p>
-        <p>Nom complet: {{ nomComplet }}</p>
-        <p>Année: {{ birthday }}</p>
-        <p v-if="showStory == true" > {{ story }}</p>
-        <p v-else>{{ story | excerpt}}</p>
-        <button @click="showMore">Lire plus</button>
-        <ul>
-            <li v-for="voyage of voyages">{{voyage}} </li>
-        </ul>
-        <span v-bind:title="time" >Horloge: {{ time }}</span>
+        <div class="mb-5 ">
+            <div >
+                <p>Prenom: {{ prenom }} </p>
+                <p>Nom:  {{ nom }}</p>
+                <p >Date: {{ today }}</p>
+                <p>Nom complet: {{ nomComplet }}</p>
+                <p>Année: {{ birthday }}</p>
+            </div>
+            
+            <p v-if="showStory == true" > {{ story }}</p>
+            <p v-else>{{ story | excerpt}}</p>
+            <button @click="showMore">Lire plus</button>
+            <ul>
+                <li v-for="voyage of voyages">{{voyage}} </li>
+            </ul>
+        </div>
+        
+        <h1 v-bind:title="time" >Horloge: {{ time }}</h1>
         <div style="margin-top: 30px;" action="">
 
             <div style="margin-bottom: 25px;">
@@ -60,31 +69,32 @@
             <h1>Méthodes personnalisée</h1>
             <div style="margin-bottom: 25px;">
                 <label style="display: block;" for="prix">Prix:</label>
-               <input type="number" name="prix" v-model="prix"></input>
+               <input min="0" type="number" name="prix" v-model="prix"></input>
             </div>
 
             <div style="margin-bottom: 25px;">
                 <label style="display: block;" for="quantite">Quantité:</label>
-               <input type="number" name="quantite" id="" v-model="quantite"></input>
+               <input  min="0" type="number" name="quantite" id="" v-model="quantite"></input>
             </div>
 
             <div style="margin-bottom: 25px;">
-                <label style="display: block;" for="quantite">Taux de TVA:</label>
-               <select name="quantite" id="" v-model="tauxTva">
-                    <option value="1">0%</option>
-                    <option value="1.05">5%</option>
-                    <option value="1.10">10%</option>
-                    <option value="1.15">15%</option>
+                <label style="display: block;" for="tauxTva">Taux de TVA:</label>
+               <select name="tauxTva" id="" v-model="tauxUse">
+                    <option v-for="taux of tauxTva" >{{taux}}</option>
+            
                </select>
             </div>
             <button name="tvaPrice" @click="tvaPrice">Calculer prix avec TVA</button>
             <button name="noTvaPrice" @click="noTvaPrice">Calculer prix sans TVA</button>
-
-            <p>Montant sans TVA {{ prixSansTva }}</p>
-            <p>Montant avec TVA {{ prixAvecTva }}</p>
+            <p>Montant avec TVA: {{ prixAvecTva }}</p>
+            <p>Montant sans TVA: {{ prixSansTva }}</p>
             
-            <button type="submit">Envoyer</button>
+            
         </div>
+
+        
+        <random-number min="5" max="15"></random-number> 
+        <random-number min="20" max="35"></random-number>       
     </div>
     
     <script src="js/vue.js"></script>

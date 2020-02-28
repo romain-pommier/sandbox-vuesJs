@@ -1,4 +1,26 @@
 
+
+let RandomNumber = {
+  template: `<div> 
+              <p >Nombre aléatoire  entre {{ min }} et {{ max }} : {{RandomNumber}}</p>
+              <button @click="getRandomNumber">Générer</button>
+            </div>`,
+  data: function() {
+    return {
+      RandomNumber: undefined
+    }
+  },
+  props: ['min', 'max'],
+  methods:{
+    getRandomNumber: function(event){
+      console.log(this.max, this.min)
+      min = Math.ceil(this.min)
+      max = Math.floor(this.max)
+      this.RandomNumber = Math.floor(Math.random() * (max - min +1)) + min
+    }
+  }
+};
+
 let vm = new Vue({   
   el: '#app',         
   data: {            
@@ -15,9 +37,10 @@ let vm = new Vue({
     newVoyage:'',
     prixSansTva:0,
     prixAvecTva:0,
-    quantite:0,
-    prix:0,
-    tauxTva:1,
+    quantite:undefined,
+    prix:undefined,
+    tauxTva:["0%","5%","10%","15%"],
+    tauxUse:1,
   }, 
   created: function() { 
     const date =  new Date();
@@ -76,12 +99,30 @@ let vm = new Vue({
       this.voyages.push(this.newVoyage)
     },
     tvaPrice: function(){
-      this.prixAvecTva = this.prix*this.quantite*this.tauxTva
+      if(this.prix > 0 && this.quantite > 0){
+        let tauxFloat = parseInt(this.tauxUse)/100+1
+        this.prixAvecTva = this.prix*this.quantite*tauxFloat
+      }
+      else{
+        alert("vous ne pouvez entrer des nombre négatif")
+        this.prixAvecTva = 0
+      }
+      
     },
     noTvaPrice: function(){
-      this.prixSansTva = this.prix*this.quantite
+      if(this.prix > 0 &&  this.quantite > 0){
+        this.prixSansTva = this.prix*this.quantite
+      }
+      else{
+        alert("vous ne pouvez entrer des nombre négatif")
+        this.prixSansTva = 0
+      }
+    
     }
     
+  },
+  components: {
+    'random-number': RandomNumber
   }
   
   
